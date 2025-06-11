@@ -1,32 +1,35 @@
-let rangeInput = document.getElementById("range");
-let rangeValue = document.getElementById("grid-current-size");
+let rangeValue = document.getElementById('range');
+let rangeText = document.getElementById('grid-current-size');
 let userInput = 16;
-rangeInput.addEventListener("input", () => {
-    userInput = rangeInput.value;
-    rangeValue.textContent = `${userInput} X ${userInput}`;
+
+etchASketch(userInput);
+
+rangeValue.addEventListener("input",() => {
+    userInput = parseInt(rangeValue.value);
+    rangeText.textContent = (`${userInput} X ${userInput}`);
+    etchASketch(userInput);
 })
+function etchASketch(userInput){
+    let grid = document.getElementById('grid');
+    grid.innerHTML="";
 
-sketch(userInput);
+    let sizeOfGrid = userInput * userInput;
+    let divSize = 100/userInput;
 
-function sketch(userInput){
-    let grid = document.getElementById(`grid`);
-
-    let sizeOfGrid = userInput;
-    let size = sizeOfGrid*sizeOfGrid;
-
-    let squareSize = 100/sizeOfGrid;
-
-    for(let i = 0; i<size;i++){
-        let div = document.createElement('div');
+    for(let i = 0; i<sizeOfGrid; i++){
+        let div = document.createElement("div");
         grid.appendChild(div);
-        div.setAttribute("style", `width:${squareSize}%; height:${squareSize}%h;`);
-        div.setAttribute("id", `div${[i]}`);
+
+        div.setAttribute("style", `height: ${divSize}%; width: ${divSize}%;`);
 
         let red = Math.floor(Math.random()*256);
         let green = Math.floor(Math.random()*256);
         let blue = Math.floor(Math.random()*256);
+
         div.addEventListener("mousemove", () => {
             div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
         });
     }
 }
+
+
