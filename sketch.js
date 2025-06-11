@@ -2,15 +2,47 @@ let rangeValue = document.getElementById('range');
 let rangeText = document.getElementById('grid-current-size');
 let userInput = 16;
 
-etchASketch(userInput);
+let colorPicker = document.getElementById("color");
+
+let clearButton = document.getElementById('clear');
+let colorButton = document.getElementById(`color-mode`);
+let rainbowButton = document.getElementById(`rainbow-mode`);
+
+let grid = document.getElementById('grid');
+
+let mode = 'rainbow';
+
+sketch(userInput);
+
+clearButton.addEventListener("click",() =>{
+    grid.innerHTML = "";
+    sketch(userInput);
+})
+
+colorButton.addEventListener(('click'), () =>{
+    mode = 'color';
+    grid.innerHTML = "";
+    sketch(userInput);
+})
+
+rainbowButton.addEventListener(('click'), () =>{
+    mode = 'rainbow';
+    grid.innerHTML = "";
+    sketch(userInput);
+})
 
 rangeValue.addEventListener("input",() => {
     userInput = parseInt(rangeValue.value);
     rangeText.textContent = (`${userInput} X ${userInput}`);
-    etchASketch(userInput);
+    sketch(userInput);
 })
-function etchASketch(userInput){
-    let grid = document.getElementById('grid');
+
+colorPicker.addEventListener("input", () =>{
+    sketch(userInput);
+})
+
+function sketch(userInput){
+    
     grid.innerHTML="";
 
     let sizeOfGrid = userInput * userInput;
@@ -27,9 +59,18 @@ function etchASketch(userInput){
         let blue = Math.floor(Math.random()*256);
 
         div.addEventListener("mousemove", () => {
+            if(mode == 'rainbow'){
             div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            }
+
+            if(mode == 'color'){
+                div.style.backgroundColor = colorPicker.value;
+            }
         });
     }
+    
 }
+
+
 
 
