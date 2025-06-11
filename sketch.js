@@ -8,5 +8,13 @@ let squareSize = 100/sizeOfGrid;
 for(let i = 0; i<size;i++){
     let div = document.createElement('div');
     grid.appendChild(div);
-    div.setAttribute("style", "`width:${squareSize}`%; height:${squareSize};");
+    div.setAttribute("style", `width:${squareSize}%; height:${squareSize}%h;`);
+    div.setAttribute("id", `div${[i]}`);
+
+    div.addEventListener("mousemove", () => {
+        div.style.backgroundColor = "lightblue";
+    });
+
+    
 }
+
