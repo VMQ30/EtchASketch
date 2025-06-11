@@ -15,25 +15,26 @@ let mode = 'rainbow';
 sketch(userInput);
 
 clearButton.addEventListener("click",() =>{
-    grid.innerHTML = "";
+    clear();
     sketch(userInput);
 })
 
 colorButton.addEventListener(('click'), () =>{
     mode = 'color';
-    grid.innerHTML = "";
+    clear();
     sketch(userInput);
 })
 
 rainbowButton.addEventListener(('click'), () =>{
     mode = 'rainbow';
-    grid.innerHTML = "";
+    clear();
     sketch(userInput);
 })
 
 rangeValue.addEventListener("input",() => {
     userInput = parseInt(rangeValue.value);
     rangeText.textContent = (`${userInput} X ${userInput}`);
+    clear()
     sketch(userInput);
 })
 
@@ -41,9 +42,11 @@ colorPicker.addEventListener("input", () =>{
     sketch(userInput);
 })
 
+function clear(){
+    grid.innerHTML = "";
+}
+
 function sketch(userInput){
-    
-    grid.innerHTML="";
 
     let sizeOfGrid = userInput * userInput;
     let divSize = 100/userInput;
